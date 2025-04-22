@@ -58,7 +58,7 @@ const CandlestickChart: React.FC<CandlestickChartProps> = ({ data }) => {
     const priceRange = maxPrice - minPrice;
     const timeRange = data[data.length - 1].timestamp - data[0].timestamp;
 
-    data.forEach((candle, i) => {
+    data.forEach((candle) => {
       // Scale values
       const x = (candle.timestamp - data[0].timestamp) / timeRange * 16 - 8;
       const yOpen = ((candle.open - minPrice) / priceRange * 16) - 8;

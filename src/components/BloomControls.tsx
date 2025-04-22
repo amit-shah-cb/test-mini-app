@@ -1,10 +1,11 @@
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { FC } from 'react';
 
 interface BloomControlsProps {
   bloomPass: UnrealBloomPass;
 }
 
-const BloomControls = ({ bloomPass }: BloomControlsProps) => {
+const BloomControls: FC<BloomControlsProps> = ({ bloomPass }) => {
   return (
     <div style={{
       position: 'absolute',

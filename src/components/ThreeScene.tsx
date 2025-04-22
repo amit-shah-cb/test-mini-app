@@ -11,7 +11,6 @@ import type { Font } from 'three/examples/jsm/loaders/FontLoader.js';
 import BloomControls from './BloomControls';
 import RGBShiftControls from './RGBShiftControls';
 import ChromaKeyControls from './ChromaKeyControls';
-import CandlestickChart from './CandlestickChart';
 
 // RGB Shift shader
 const RGBShiftShader = {
@@ -293,7 +292,7 @@ const ThreeScene = () => {
     // Clear previous references
     candlesticksRef.current = [];
 
-    sampleData.forEach((candle, i) => {
+    sampleData.forEach((candle) => {
       // Scale values to fit in chart area
       const x = ((candle.timestamp - sampleData[0].timestamp) / timeRange - 0.5) * 2.5;
       const yOpen = ((candle.open - minPrice) / priceRange - 0.5) * 1.5;
@@ -451,7 +450,7 @@ const ThreeScene = () => {
         video.crossOrigin = 'anonymous';
 
         // Add event listeners for better error handling
-        video.addEventListener('error', (e) => {
+        video.addEventListener('error', () => {
           console.error('Video error:', video.error);
         });
 
