@@ -2,8 +2,8 @@
 {
     "frame": {
         "version": "1",
-        "name": "Yoink!",
-        "iconUrl": "https://test-mini-app-6qe9.vercel.app/logo.png",
-        "homeUrl": "https://test-mini-app-sigma.vercel.app/"
+        "name": "Test!",
+        "iconUrl": "https://test-mini-app-sigma.vercel.app/logo.png",
+        "homeUrl": "https://test-mini-app-sigma.vercel.app"
     }
 }

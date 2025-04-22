@@ -4,11 +4,11 @@ const frameMetadata = {
   version: "next",
   imageUrl: "https://test-mini-app-sigma.vercel.app/logo.png",
   button: {
-    title: "🚩 Start",
+    title: "Start",
     action: {
       type: "launch_frame",
       name: "test!",
-      url: "https://test-mini-app-sigma.vercel.app/",
+      url: "https://test-mini-app-sigma.vercel.app",
       splashImageUrl: "https://test-mini-app-sigma.vercel.app/logo.png",
       splashBackgroundColor: "#f5f0ec"
     }
