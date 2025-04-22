@@ -2,7 +2,6 @@ import { FC, useEffect } from 'react';
 import { sdk } from "@farcaster/frame-sdk";
 import { useAccount, useConnect, useSignMessage } from "wagmi";
 import ThreeScene from "./components/ThreeScene";
-import Header from './components/Header';
 
 const App: FC = () => {
   useEffect(() => {
@@ -11,7 +10,7 @@ const App: FC = () => {
 
   return (
     <>
-      <Header />
+      
       <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '20px' }}>
           <div>Mini App + Vite + TS + React + Wagmi</div>
