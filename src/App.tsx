@@ -1,25 +1,29 @@
+import { FC, useEffect } from 'react';
 import { sdk } from "@farcaster/frame-sdk";
-import { useEffect } from "react";
 import { useAccount, useConnect, useSignMessage } from "wagmi";
 import ThreeScene from "./components/ThreeScene";
+import Header from './components/Header';
 
-function App() {
+const App: FC = () => {
   useEffect(() => {
     sdk.actions.ready();
   }, []);
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ padding: '20px' }}>
-        <div>Mini App + Vite + TS + React + Wagmi</div>
-        <ConnectMenu />
+    <>
+      <Header />
+      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '20px' }}>
+          <div>Mini App + Vite + TS + React + Wagmi</div>
+          <ConnectMenu />
+        </div>
+        <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+          <ThreeScene />
+        </div>
       </div>
-      <div style={{ flex: 1 }}>
-        <ThreeScene />
-      </div>
-    </div>
+    </>
   );
-}
+};
 
 function ConnectMenu() {
   const { isConnected, address } = useAccount();
