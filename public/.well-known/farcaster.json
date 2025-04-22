@@ -1,5 +1,9 @@
-
 {
+    "accountAssociation": {
+        "header": "eyJmaWQiOjc0NzgyMywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweGU1MzZmOEM5ZUU3OTRmMjcyMTFmZmI1ZDQ5ODFGMDMyQzEyRTM3NzcifQ",
+        "payload": "eyJkb21haW4iOiJ0ZXN0LW1pbmktYXBwLXNpZ21hLnZlcmNlbC5hcHAifQ",
+        "signature": "MHhlYzI4NjAxNTgzZTZmNThhNTczZDU0N2Q0OWIwZWQwMTBmNmQwM2Y1Mjk4OGEzMWYxZjIzZGY5ODRhMGY0N2JmNTIxMjdhZGU4NmQ2NWZhMGNlNzg1ODI3NGM0MTQ1ZTRiNmFjOTBkODg5YWZiNTkyOGRkNTZlNTkyMmRhZjUzYTFj"
+    },
     "frame": {
         "version": "1",
         "name": "Test!",
