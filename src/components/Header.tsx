@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 const Header: FC = () => {
   return (
-    <Helmet>
+    <Helmet encodeSpecialCharacters={false}>
       <meta name="fc:frame" content={JSON.stringify({
         version: "next",
         imageUrl: "https://test-mini-app-sigma.vercel.app/logo.png",
