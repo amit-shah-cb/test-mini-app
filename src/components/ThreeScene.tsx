@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import * as THREE from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
@@ -11,6 +11,7 @@ import type { Font } from 'three/examples/jsm/loaders/FontLoader.js';
 import BloomControls from './BloomControls';
 import RGBShiftControls from './RGBShiftControls';
 import ChromaKeyControls from './ChromaKeyControls';
+import WebcamTexture from './WebcamTexture';
 
 // RGB Shift shader
 const RGBShiftShader = {
@@ -95,6 +96,8 @@ const ThreeScene = () => {
   const candlesticksRef = useRef<THREE.Group[]>([]);
   const animationStartTime = useRef<number | null>(null);
   const isAnimating = useRef(false);
+  const webcamPlaneRef = useRef<THREE.Mesh | null>(null);
+  const webcamTextureRef = useRef<THREE.VideoTexture | null>(null);
 
   // Animation function defined outside useEffect
   const animate = () => {
@@ -163,6 +166,26 @@ const ThreeScene = () => {
     rendererRef.current.setSize(width, height);
     composerRef.current.setSize(width, height);
   };
+
+  const handleWebcamTextureReady = useCallback((texture: THREE.VideoTexture) => {
+    if (!sceneRef.current) return;
+
+    webcamTextureRef.current = texture;
+
+    // Create plane for webcam
+    const planeGeometry = new THREE.PlaneGeometry(2, 1.25); // 16:9 aspect ratio
+    const planeMaterial = new THREE.MeshBasicMaterial({
+      map: texture,
+      side: THREE.DoubleSide
+    });
+    
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.position.set(-2, -1, 0); // Position the plane
+    plane.rotation.y = Math.PI / 2; // Slight tilt
+    
+    webcamPlaneRef.current = plane;
+    sceneRef.current.add(plane);
+  }, []);
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -563,8 +586,24 @@ const ThreeScene = () => {
     { low: 2.0, high: 5.0, open: 4.0, close: 4.8, timestamp: Date.now() }
   ];
 
+  // Add cleanup for webcam plane
+  useEffect(() => {
+    return () => {
+      if (webcamPlaneRef.current) {
+        webcamPlaneRef.current.geometry.dispose();
+        if (webcamPlaneRef.current.material instanceof THREE.Material) {
+          webcamPlaneRef.current.material.dispose();
+        }
+      }
+      if (webcamTextureRef.current) {
+        webcamTextureRef.current.dispose();
+      }
+    };
+  }, []);
+
   return (
     <>
+      <WebcamTexture onTextureReady={handleWebcamTextureReady} />
       <div ref={mountRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
         {bloomPass && <BloomControls bloomPass={bloomPass} />}
         {rgbShiftPass && <RGBShiftControls shaderPass={rgbShiftPass} />}
